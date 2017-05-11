@@ -10,8 +10,12 @@ const homeRoutes = [
   {
     path:'',
     component:HomeComponent,
+    children:[{
+      path:'list',
+      loadChildren:'../post/post.module#PostModule'
+    }]
   }
-]
+];
 @NgModule({
   imports: [
     CommonModule,
