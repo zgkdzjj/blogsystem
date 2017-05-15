@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormControl, FormsModule} from '@angular/forms';
 import { PostlistComponent } from './postlist/postlist.component';
+import { PostlistService } from './postlist/service/postlist.service'
 import { RouterModule} from '@angular/router';
 
 const postRoutes = [
@@ -18,8 +20,12 @@ const postRoutes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(postRoutes)
   ],
-  declarations: [PostlistComponent]
+  declarations: [PostlistComponent],
+  providers: [
+    PostlistService
+  ]
 })
 export class PostModule { }

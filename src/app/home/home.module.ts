@@ -11,7 +11,7 @@ const homeRoutes = [
     path:'',
     component:HomeComponent,
     children:[{
-      path:'list',
+      path:'',
       loadChildren:'../post/post.module#PostModule'
     }]
   }
