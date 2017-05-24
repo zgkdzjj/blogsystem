@@ -37,6 +37,7 @@ export function createTranslateLoader(http:Http) {
   declarations: [
     AppComponent,
 
+
   ],
   imports: [
     BrowserModule,

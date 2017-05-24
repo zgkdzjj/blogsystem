@@ -11,7 +11,7 @@ import {Post} from "../model/post-model";
 })
 export class PostlistComponent implements OnInit {
   public maxSize:number = 5;
-  public itemsPerPage:number = 5;
+  public itemsPerPage:number = 2;
 
   public totalItems: number;
   public currentPage:number = 1;
@@ -28,7 +28,7 @@ export class PostlistComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.params.subscribe(params =>{
-      console.log(params);
+      console.log('params>'+ JSON.stringify(params));
       this.loadData(this.searchText, this.currentPage);
     });
 
@@ -40,16 +40,23 @@ export class PostlistComponent implements OnInit {
         this.loadData(this.searchText,this.currentPage)
       });
 
+    console.log('post>' + JSON.stringify(this.postList));
+
   }
+
+
 
   public loadData(searchText:string, page:number) {
     let offset = (this.currentPage-1)*this.itemsPerPage;
     let end = (this.currentPage)*this.itemsPerPage;
+    console.log('offset>' + offset);
+    console.log('end>' + end);
 
     return this.postListService.getPostList(searchText,page).subscribe(
       res => {
         this.totalItems = res["total"];
         this.postList = res["items"].slice(offset,end>this.totalItems?this.totalItems:end);
+        //this.postList = res["items"];
       },
       err => {
         console.log(err)
@@ -60,7 +67,7 @@ export class PostlistComponent implements OnInit {
 
 
   public pageChanged(event:any):void {
-    this.router.navigateByUrl("posts/page" + event.page);
+    this.router.navigateByUrl("posts/page/" + event.page);
   }
 
   public searchChanged($event):void {
